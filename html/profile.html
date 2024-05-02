@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="./css/profile.css">
+    <link href="https://fonts.googleapis.com./css2?family=Montserrat&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page grid">
+        <!-- DESKTOP NAVBAR -->
+        <nav class="desktop">
+            <ul><div class="left">
+
+                <div id="logo"><a href="./html./index.html"><h3>Notepad</h3></div></a>
+              
+              <li class="search-container">
+                <input type="search" placeholder="Search">
+                <img src="assets/search.png" alt="">
+              </li>
+            </div>
+              
+                <div class="right">
+
+                  <li><a href="./html./index.html">Home</a></li>
+                  <li><a href="./html/archive.html">Trash</a></li>
+                  <li><a href="./html/reminder.html">Reminders</a></li>
+                  <li id="login"><a href="./html/profile.html">Login</a></li>
+                </div>
+                
+            </ul>
+        </nav>
+
+        <nav class="mobiles-top">
+            <h2>Notepad</h2>
+            <img src="assets/user.png" alt="">
+        </nav>
+        <nav class="mobiles-bottom">
+            <ul>
+              
+                <li id="home-icon" class="nav-link" onclick="highlightButton(event, 'home')"><a href="./html./index.html"><img src="./assets/home2.png" alt=""><h4>Home</h4></a></li>
+                <li id="delete-icon" class="nav-link" onclick="highlightButton(event, 'archive')"><a href="./html/archive.html"><img src="./assets/delete2.png" alt=""><h4>Trash</h4></a></li>
+                <li id="reminder-icon" class="nav-link" onclick="highlightButton(event, 'notification')"><a href="./html/reminder.html"><img src="./assets/reminder.png" alt=""><h4>Reminders</h4></a></li> 
+                
+                <li id="setting-icon" class="nav-link" onclick="highlightButton(event, 'setting')"><a href="./html/profile.html"><img src="./assets/profile.png" alt=""><h4>Profile</h4></li></a>
+                </ul>
+        </nav>
+
+        <section class="welcome">
+            <h2>Welcome to your profile, Ayush!</h2>
+           <div class="profile-img"><img src="./assets/user.png" alt="">
+            <a href=""><h4>Change Profile Picture</h4></a>
+        </div>
+           <div class="details">
+            <div class="username"><h3>ayushsharma</h3> <a href="#" onclick="toggleEditProfile()"><img src="./assets/edit.png" id="edit-icon" alt=""></a></div>
+
+            
+
+            <h3>ayushsharma1016@gmail.com</h3>
+            <div class="edit-profile-container" id="editProfileContainer">
+                <label for="editUsername">Edit Username:</label>
+                <input type="text" id="editUsername" name="editUsername">
+                <button onclick="submitEditProfile()">Save</button>
+            </div>    
+        </div>
+            <div class="logoutbtn"> <a href="#" onclick="toggleChangePassword()">Change Password</a></div>
+            <div class="change-password-container" id="changePasswordContainer">
+                <h3>Change Password</h3>
+                <div class="label-class">
+                    <label for="currentPassword">Current Password:</label>
+                    <input type="password" id="currentPassword" name="currentPassword" required>
+                </div>
+            
+                <div class="label-class">
+                    <label for="newPassword">New Password:</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+            
+                <div class="label-class">
+                    <label for="confirmNewPassword">Confirm New Password:</label>
+                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                </div>
+            
+                <button onclick="submitPasswordChange()">Submit</button>
+            </div>
+            <div class="logoutbtn"> <a href="#">Logout</a></div>
+
+            
+            
+        </section>
+
+        <h2 id="new-fts">New Features</h2>
+        <section class="new-features-container">
+            <div class="feature-1">
+                <h3>Set Reminders</h3>
+            </div>
+            <div class="feature-2">
+                <h3>Edit Notes</h3>
+            </div>
+            <div class="feature-3">
+                <h3>Fluid Design</h3>
+            </div>
+            <div class="feature-4">
+                <h3>Switch Themes</h3>
+            </div>
+            <div class="feature-5">
+                <h3>And Much More...</h3>
+            </div>
+
+        </section>
+
+
+        <script>
+            function toggleChangePassword() {
+                var changePasswordContainer = document.getElementById("changePasswordContainer");
+                changePasswordContainer.style.display = (changePasswordContainer.style.display === "flex") ? "none" : "flex";
+            }
+        
+            function submitPasswordChange() {
+                //APNA LOGIC DAAL LIYO
+            }
+
+
+            function toggleEditProfile() {
+        var editProfileContainer = document.getElementById("editProfileContainer");
+        editProfileContainer.style.display = "flex";
+    }
+
+    function submitEditProfile() {
+        var editedUsername = document.getElementById("editUsername").value;
+        document.getElementById("usernameDisplay").textContent = editedUsername;
+        toggleEditProfile(); 
+    }
+        </script>
+        
+    </body>

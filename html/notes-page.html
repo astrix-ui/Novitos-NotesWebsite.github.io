@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="./css/notes-page.css">
+    <link href="https://fonts.googleapis.com./css2?family=Montserrat&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="desktop">
+        <ul><div class="left">
+
+          <div id="logo"><a href="./html./index.html" id="logo-home"><h3>Notepad</h3></a></div>
+          
+          <li class="search-container">
+            <input type="search" placeholder="Search">
+            <img src="/NOTES WEBSITE./assets/search.png" alt="">
+          </li>
+        </div>
+          
+            <div class="right">
+
+              <li><a href="./html./index.html">Home</a></li>
+              <li><a href="./html/archive.html">Trash</a></li>
+              <li><a href="./html/reminder.html">Reminders</a></li>
+              <li id="login"><a href="./html/login.html">Login</a></li>
+            </div>
+            
+        </ul>
+    </nav>
+
+    <nav class="mobiles-top">
+        <a href="./html./index.html" id="mobile-home-btn"><h2>Notepad</h2></a>
+        <img src="./assets/user.png" alt="">
+    </nav>
+    <nav class="mobiles-bottom">
+        <ul>
+          
+          <li id="home-icon" class="nav-link" onclick="highlightButton(event, 'home')"><a href="./html./index.html"><img src="./assets/home2.png" alt=""><h4>Home</h4></a></li>
+          <li id="delete-icon" class="nav-link" onclick="highlightButton(event, 'archive')"><a href="./html/archive.html"><img src="./assets/delete2.png" alt=""><h4>Trash</h4></a></li>
+          <li id="reminder-icon" class="nav-link" onclick="highlightButton(event, 'notification')"><a href="./html/reminder.html"><img src="./assets/reminder.png" alt=""><h4>Reminders</h4></a></li> 
+          
+          <li id="setting-icon" class="nav-link" onclick="highlightButton(event, 'setting')"><a href="./html/profile.html"><img src="./assets/profile.png" alt=""><h4>Profile</h4></li></a>
+          </ul>
+    </nav>
+    <section class="content">
+        <h2>This is your heading</h2>
+        <p>Lorem ipsum dolor Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, rerum. Omnis, soluta sequi modi sit, vel aliquam laboriosam nihil dolore debitis accusamus non iste ratione aliquid expedita nesciunt quas sed, ipsum dolor? Rerum sequi animi eaque necessitatibus accusantium temporibus delectus earum? Ratione totam, omnis quo, nemo et repudiandae veniam numquam ea amet nihil, fugit eos debitis excepturi quam assumenda facilis nisi vero aspernatur dolorem modi. Repudiandae labore suscipit voluptas eum illo temporibus totam doloremque possimus culpa, quaerat nisi tempora odit numquam! Esse optio eligendi, voluptatibus illo quis ratione itaque incidunt dolorum cum, sed modi obcaecati quam debitis vero dicta corrupti. consectetur adipisicing elit. Ullam commodi neque qui sequi odit culpa cumque id, quisquam architecto debitis eum soluta a harum illum hic alias ratione fugiat eligendi mollitia tempore! Praesentium laborum, tempora atque enim architecto repudiandae velit quaerat saepe dicta veritatis? Pariatur nisi a enim eos maiores omnis. Perspiciatis possimus reiciendis nihil nemo autem impedit voluptatem consequuntur vero nesciunt vitae similique architecto, adipisci veniam ad eos voluptas tempore ipsam nisi dolor recusandae error, laborum iste dolore delectus. Ut libero voluptatem, repellat error culpa soluta doloribus totam rem molestias, aliquid sed? Dicta cupiditate beatae, distinctio corrupti quod alias. sit amet consectetur adipisicing elit. Fugiat, corrupti voluptate! Labore sunt molestiae molestias pariatur. Perferendis temporibus dignissimos quae saepe, optio dolor impedit amet asperiores deserunt, culpa quod ipsam tempore quasi iure omnis.</p>
+    </section>
+    <section class="bottom-panel" id="bottomPanel">
+        <ul>
+            <li><a href="#" onclick="return openPopup(event)"><p>Edit</p><img src="./assets/edit.png" alt="edit"></a></li>
+            <li><a href="#" id="reminder-icon-panel" onclick="toggleBottomPanel(event, 'reminder')"><p >Reminder</p><img src="./assets/reminder.png" alt="reminder"></a></li>
+            <li><a href=""><p>Delete</p><img src="./assets/delete.png" alt="delete"></a></li>
+        </ul>
+
+        <div class="reminder-text">
+          <p>Set a reminder</p>
+          <h2>15:69</h2>
+          <div class="event-details">
+          <form action="">
+            <label for="Time">Set a time </label>
+            <input type="time">
+            <br>
+            <label for="Date">Set a Date </label>
+            <input type="date">
+          </form>
+          
+          
+          <p>Event Name</p>
+          <input type="text" name="event-name" placeholder="Maximum 20 characters" >
+          <button>Set Reminder</button>
+
+
+          </div>
+
+
+          </div>
+    </section>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" onclick="closePopup()">&times;</span>
+          <h3>Add a new note</h3>
+          <textarea id="topicInput" placeholder="Enter your topic here" maxlength="50"></textarea>
+          <textarea id="noteInput" placeholder="Enter your note here" oninput="adjustTextareaHeight(this)"></textarea>
+          <button onclick="submitNote()">Create</button>
+        </div>
+      </div>
+</body>
+<script>
+    function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+  function submitNote() {
+    const topicInput = document.getElementById('topicInput').value;
+    const noteInput = document.getElementById('noteInput').value;
+    
+    if (topicInput.length > 50) {
+      alert('The title of your note must be 50 characters or less.');
+      return;
+    }
+    const boxContainer = document.querySelector('.box-container');
+    const newBox = document.createElement('div');
+    newBox.classList.add('box');
+    newBox.innerHTML = `
+    <img src="/NOTES WEBSITE./assets/delete2.png" alt="">
+      <h2>${topicInput}</h2>
+      <p>${noteInput}</p>
+    `;
+    boxContainer.appendChild(newBox);
+
+
+
+  // Clear the text areas after submitting the note
+  document.getElementById('topicInput').value = '';
+  document.getElementById('noteInput').value = '';
+    // Close the popup after submitting the note
+    closePopup();
+  }
+
+  const MAX_HEIGHT = 450;
+  function adjustTextareaHeight(textarea) {
+    textarea.style.height = 'auto'; // Reset the height to auto to calculate the new height
+    textarea.style.height = Math.min(textarea.scrollHeight, MAX_HEIGHT) + 'px'; // Set the new height
+  }
+
+//   MAKING THE PANEL EXPAND UPON REMINDER BUTTON CLICK 
+
+function toggleBottomPanel(event, panelId) {
+    event.preventDefault(); // Prevent the default anchor behavior
+    
+    const bottomPanel = document.getElementById('bottomPanel');
+    const activePanel = document.querySelector('.active-panel');
+    const reminderText = document.querySelector('.reminder-text');
+
+    if (activePanel && activePanel !== bottomPanel) {
+        
+        activePanel.classList.remove('active-panel');
+        reminderText.style.display = 'none';
+        
+    }
+
+    if (bottomPanel.classList.contains('active-panel') && bottomPanel.dataset.activePanel === panelId) {
+        bottomPanel.style.height = '55px';
+        bottomPanel.classList.remove('active-panel');
+        reminderText.style.display = 'none';
+    } else {
+        bottomPanel.style.height = '80vh';
+        bottomPanel.style.alignItems = "end"
+        bottomPanel.dataset.activePanel = panelId;
+        bottomPanel.classList.add('active-panel');
+        reminderText.style.display = 'block';
+        
+    }
+}
+
+function openReminderPopup(event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+    openPopup();
+}
+
+
+
+
+  
+</script>
+<./html>

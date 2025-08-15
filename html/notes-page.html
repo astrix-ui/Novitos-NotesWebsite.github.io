@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="../css/notes-page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="desktop">
+        <ul>
+            <div class="left">
+                <div id="logo"><a href="../index.html" id="logo-home"><h3>Notepad</h3></a></div>
+                <li class="search-container">
+                    <input type="search" placeholder="Search">
+                    <img src="../assets/search.png" alt="">
+                </li>
+            </div>
+            <div class="right">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="archive.html">Trash</a></li>
+                                    <li><a href="html/to_do.html">To Do</a></li>
+
+                <li><a href="reminder.html">Reminders</a></li>
+                <li id="login"><a href="login.html">Login</a></li>
+            </div>
+        </ul>
+    </nav>
+
+    <nav class="mobiles-top">
+        <a href="../index.html" id="mobile-home-btn"><h2>Notepad</h2></a>
+        <img src="../assets/user.png" alt="">
+    </nav>
+
+    <nav class="mobiles-bottom">
+        <ul>
+            <li id="home-icon" class="nav-link" onclick="highlightButton(event, 'home')">
+                <a href="../index.html"><img src="../assets/home2.png" alt=""><h4>Home</h4></a>
+            </li>
+            <li id="delete-icon" class="nav-link" onclick="highlightButton(event, 'archive')">
+                <a href="archive.html"><img src="../assets/delete2.png" alt=""><h4>Trash</h4></a>
+            </li>
+            <li id="reminder-icon" class="nav-link" onclick="highlightButton(event, 'notification')">
+                <a href="reminder.html"><img src="../assets/reminder.png" alt=""><h4>Reminders</h4></a>
+            </li>
+            <li id="setting-icon" class="nav-link" onclick="highlightButton(event, 'setting')">
+                <a href="profile.html"><img src="../assets/profile.png" alt=""><h4>Profile</h4></a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="content">
+        <h2 id="note-title">This is your heading</h2>
+        <p id="note-body">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+    </section>
+
+    <section class="bottom-panel" id="bottomPanel">
+        <ul>
+            <li><a href="#" id="edit-btn"><p>Edit</p><img src="../assets/edit.png" alt="edit"></a></li>
+            <li><a href="#" id="reminder-icon-panel" onclick="toggleBottomPanel(event, 'reminder')"><p>Reminder</p><img src="../assets/reminder.png" alt="reminder"></a></li>
+            <li><a href=""><p>Delete</p><img src="../assets/delete.png" alt="delete"></a></li>
+        </ul>
+
+        <div class="reminder-text">
+            <p>Set a reminder</p>
+            <h2>15:69</h2>
+            <div class="event-details">
+                <form action="">
+                    <label for="Time">Set a time </label>
+                    <input type="time">
+                    <br>
+                    <label for="Date">Set a Date </label>
+                    <input type="date">
+                </form>
+                <p>Event Name</p>
+                <input type="text" name="event-name" placeholder="Maximum 20 characters">
+                <button>Set Reminder</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Add a new note</h3>
+            <textarea id="topicInput" placeholder="Enter your topic here" maxlength="50"></textarea>
+            <textarea id="noteInput" placeholder="Enter your note here" oninput="adjustTextareaHeight(this)"></textarea>
+            <button onclick="submitNote()">Create</button>
+        </div>
+    </div>
+
+<script>
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+}
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+function submitNote() {
+    const topicInput = document.getElementById('topicInput').value;
+    const noteInput = document.getElementById('noteInput').value;
+    if (topicInput.length > 50) {
+        alert('The title of your note must be 50 characters or less.');
+        return;
+    }
+    const boxContainer = document.querySelector('.box-container');
+    const newBox = document.createElement('div');
+    newBox.classList.add('box');
+    newBox.innerHTML = `
+        <img src="../assets/delete2.png" alt="">
+        <h2>${topicInput}</h2>
+        <p>${noteInput}</p>
+    `;
+    boxContainer.appendChild(newBox);
+    document.getElementById('topicInput').value = '';
+    document.getElementById('noteInput').value = '';
+    closePopup();
+}
+const MAX_HEIGHT = 450;
+function adjustTextareaHeight(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, MAX_HEIGHT) + 'px';
+}
+function toggleBottomPanel(event, panelId) {
+    event.preventDefault();
+    const bottomPanel = document.getElementById('bottomPanel');
+    const activePanel = document.querySelector('.active-panel');
+    const reminderText = document.querySelector('.reminder-text');
+    if (activePanel && activePanel !== bottomPanel) {
+        activePanel.classList.remove('active-panel');
+        reminderText.style.display = 'none';
+    }
+    if (bottomPanel.classList.contains('active-panel') && bottomPanel.dataset.activePanel === panelId) {
+        bottomPanel.style.height = '55px';
+        bottomPanel.classList.remove('active-panel');
+        reminderText.style.display = 'none';
+    } else {
+        bottomPanel.style.height = '80vh';
+        bottomPanel.style.alignItems = "end";
+        bottomPanel.dataset.activePanel = panelId;
+        bottomPanel.classList.add('active-panel');
+        reminderText.style.display = 'block';
+    }
+}
+
+// ===== Edit Button Functionality =====
+document.getElementById("edit-btn").addEventListener("click", function(e) {
+    e.preventDefault();
+    const titleEl = document.getElementById("note-title");
+    const bodyEl = document.getElementById("note-body");
+
+    if (this.dataset.mode !== "editing") {
+        // Turn into input fields
+        const titleInput = document.createElement("input");
+        titleInput.type = "text";
+        titleInput.value = titleEl.textContent;
+        titleInput.id = "note-title";
+
+        const bodyTextarea = document.createElement("textarea");
+        bodyTextarea.value = bodyEl.textContent;
+        bodyTextarea.id = "note-body";
+
+        titleEl.replaceWith(titleInput);
+        bodyEl.replaceWith(bodyTextarea);
+
+        this.querySelector("p").textContent = "Save";
+        this.dataset.mode = "editing";
+    } else {
+        // Save changes
+        const titleInput = document.getElementById("note-title");
+        const bodyTextarea = document.getElementById("note-body");
+
+        const newTitle = document.createElement("h2");
+        newTitle.id = "note-title";
+        newTitle.textContent = titleInput.value;
+
+        const newBody = document.createElement("p");
+        newBody.id = "note-body";
+        newBody.textContent = bodyTextarea.value;
+
+        titleInput.replaceWith(newTitle);
+        bodyTextarea.replaceWith(newBody);
+
+        this.querySelector("p").textContent = "Edit";
+        this.dataset.mode = "";
+    }
+});
+</script>
+</body>
+</html>

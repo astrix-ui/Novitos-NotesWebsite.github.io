@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="../css/archive.css">
+</head>
+<body>
+    <div class="page grid">
+        <!-- DESKTOP NAVBAR -->
+        <nav class="desktop">
+            <ul>
+                <div class="left">
+                    <div id="logo">
+                        <a href="../index.html"><h3>Notepad</h3></a>
+                    </div>
+                </div>
+                <div class="right">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#" class="active-nav">Trash</a></li>
+                                        <li><a href="html/to_do.html">To Do</a></li>
+
+                    <li><a href="reminder.html">Reminders</a></li>
+                    <li id="login"><a href="login.html">Login</a></li> 
+                </div>
+            </ul>
+        </nav>
+
+        <!-- MOBILE NAV TOP -->
+        <nav class="mobiles-top">
+            <h2>Notepad</h2>
+            <img src="../assets/user.png" alt="">
+        </nav>
+
+        <!-- MOBILE NAV BOTTOM -->
+        <nav class="mobiles-bottom">
+            <ul>
+                <li id="home-icon" class="nav-link" onclick="highlightButton(event, 'home')">
+                    <a href="../index.html"><img src="../assets/home2.png" alt=""><h4>Home</h4></a>
+                </li>
+                <li id="delete-icon" class="nav-link" onclick="highlightButton(event, 'archive')">
+                    <a href="archive.html"><img src="../assets/delete2.png" alt=""><h4>Trash</h4></a>
+                </li>
+                <li id="reminder-icon" class="nav-link" onclick="highlightButton(event, 'notification')">
+                    <a href="reminder.html"><img src="../assets/reminder.png" alt=""><h4>Reminders</h4></a>
+                </li> 
+                <li id="setting-icon" class="nav-link" onclick="highlightButton(event, 'setting')">
+                    <a href="profile.html"><img src="../assets/profile.png" alt=""><h4>Profile</h4></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- PAGE HEADING -->
+        <section id="heading-tr">Trash</section>
+
+        <!-- TRASH CONTENT -->
+        <section class="box-container grid">
+            <div class="box">
+                <h2>Welcome</h2>
+                <p>Let's warm you up! Click the "+" button to create a new note!</p>
+            </div>
+
+            <div class="box">
+                <h2>Welcome</h2>
+                <p>Let's warm you up! Click the "+" button to create a new note!</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

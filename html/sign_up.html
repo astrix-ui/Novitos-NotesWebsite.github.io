@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="../css/sign_up.css">
+</head>
+<body>
+    <div class="page grid">
+
+        <!-- DESKTOP NAVBAR -->
+        <nav class="desktop">
+            <ul>
+                <div class="left">
+                    <div id="logo">
+                        <a href="../index.html"><h3>Notepad</h3></a>
+                    </div>
+                </div>
+                <div class="right">
+                    <li><a href="../index.html">Home</a></li>
+                    <!-- <li><a href="#">Archive</a></li>
+                    <li><a href="#">Reminders</a></li>
+                    <li id="login"><a href="../html/profile.html">Login</a></li> -->
+                </div>
+            </ul>
+        </nav>
+
+        <!-- MOBILE NAVBARS -->
+        <nav class="mobiles-top">
+            <h2>Notepad</h2>
+            <img src="../assets/user.png" alt="">
+        </nav>
+
+        <nav class="mobiles-bottom">
+            <ul>
+                <li id="home-icon" class="nav-link" onclick="highlightButton(event, 'home')">
+                    <a href="../index.html"><img src="../assets/home2.png" alt=""><h4>Home</h4></a>
+                </li>
+                <!--
+                <li id="delete-icon" class="nav-link" onclick="highlightButton(event, 'archive')">
+                    <a href="../index.html"><img src="../assets/delete2.png" alt=""><h4>Trash</h4></a>
+                </li>
+                <li id="reminder-icon" class="nav-link" onclick="highlightButton(event, 'notification')">
+                    <a href="../index.html"><img src="../assets/reminder.png" alt=""><h4>Reminders</h4></a>
+                </li>
+                <li id="setting-icon" class="nav-link" onclick="highlightButton(event, 'setting')">
+                    <a href="../index.html"><img src="../assets/setting.png" alt=""><h4>Settings</h4></a>
+                </li>
+                -->
+            </ul>
+        </nav>
+
+        <!-- SIGN UP FORM -->
+        <div class="container">
+            <div class="form-container">
+                <h2>Create Account</h2>
+                <form id="login-form" class="active-form">
+                    <input type="text" placeholder="Username" name="username" required>
+                    <input type="text" placeholder="Email Address (optional)" name="email">
+                    <input type="text" placeholder="Phone Number" name="phone" required>
+
+                    <input type="password" placeholder="Password" name="password" required>
+                    <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+
+                    <button type="submit">Sign Up</button>
+                    <p class="toggle-form">Already have an account? <a href="../html/login.html">Login</a></p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

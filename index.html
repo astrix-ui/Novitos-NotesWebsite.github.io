@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page grid">
+        <!-- DESKTOP NAVBAR -->
+        <nav class="desktop">
+            <ul>
+                <div class="left">
+                    <div id="logo"><h3>Notepad</h3></div>
+                    <li class="search-container">
+                        <input type="search" placeholder="Search">
+                        <img src="assets/search.png" alt="">
+                    </li>
+                </div>
+                <div class="right">
+                    <li><a href="html/index.html" class="active-nav">Home</a></li>
+                    <li><a href="html/archive.html">Trash</a></li>
+                    <li><a href="html/to_do.html">To Do</a></li>
+
+                    <li><a href="html/reminder.html">Reminders</a></li>
+                    <li id="login"><a href="html/login.html">Login</a></li>
+                </div>
+            </ul>
+        </nav>
+
+        <!-- MOBILE NAV TOP -->
+        <nav class="mobiles-top">
+            <h2>Notepad</h2>
+            <img src="assets/user.png" alt="">
+        </nav>
+
+        <!-- MOBILE NAV BOTTOM -->
+        <nav class="mobiles-bottom">
+            <ul>
+                <li id="home-icon" class="nav-link" onclick="highlightButton(event, 'home')">
+                    <a href="html/index.html"><img src="assets/home2.png" alt=""><h4>Home</h4></a>
+                </li>
+                <li id="delete-icon" class="nav-link" onclick="highlightButton(event, 'archive')">
+                    <a href="html/archive.html"><img src="assets/delete2.png" alt=""><h4>Trash</h4></a>
+                </li>
+                <li id="reminder-icon" class="nav-link" onclick="highlightButton(event, 'notification')">
+                    <a href="html/reminder.html"><img src="assets/reminder.png" alt=""><h4>Reminders</h4></a>
+                </li>
+                <li id="setting-icon" class="nav-link" onclick="highlightButton(event, 'setting')">
+                    <a href="html/profile.html"><img src="assets/profile.png" alt=""><h4>Profile</h4></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+            <section class="top">
+                <h1 class="welcome">Good Morning Ayush!</h1>
+                <div class="profile">
+                    <img src="assets/user.png" alt="" id="profile-img">
+                    <h3>Ayush</h3>
+                    <img src="assets/down-arrow.png" alt="" id="dropdown">
+                    <div class="dropdown-content">
+                        <a href="html/profile.html">My Profile</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#" id="logout-btn">Logout</a>
+                    </div>
+                </div>
+                <section class="search-container">
+                    <input type="search" placeholder="Search">
+                </section>
+            </section>
+
+            <!-- ADD NEW NOTE BUTTON -->
+            <div class="new-note">
+                <a href="#" onclick="return openPopup(event)">
+                    <img src="assets/plus-new.png" alt="">
+                </a>
+            </div>
+
+            <!-- POPUP -->
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <h3>Add a new note</h3>
+                    <textarea id="topicInput" placeholder="Enter your topic here" maxlength="50"></textarea>
+                    <textarea id="noteInput" placeholder="Enter your note here" oninput="adjustTextareaHeight(this)"></textarea>
+                    <button onclick="submitNote()">Create</button>
+                </div>
+            </div>
+
+            <!-- NOTE BOXES -->
+            <section class="box-container grid">
+                <a href="html/notes-page.html">
+                    <div class="box">
+                        <h2>Welcome</h2>
+                        <p>Let's warm you up! Click the "+" button to create a new note!</p>
+                    </div>
+                </a>
+            </section>
+        </div>
+    </div>
+
+<script>
+  function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  function submitNote() {
+    const topicInput = document.getElementById('topicInput').value;
+    const noteInput = document.getElementById('noteInput').value;
+    
+    if (topicInput.length > 50) {
+      alert('The title of your note must be 50 characters or less.');
+      return;
+    }
+    const boxContainer = document.querySelector('.box-container');
+    const newBox = document.createElement('div');
+    newBox.classList.add('box');
+    newBox.innerHTML = `
+      <img src="assets/delete2.png" alt="">
+      <h2>${topicInput}</h2>
+      <p>${noteInput}</p>
+    `;
+    boxContainer.appendChild(newBox);
+
+    document.getElementById('topicInput').value = '';
+    document.getElementById('noteInput').value = '';
+    closePopup();
+  }
+
+  const MAX_HEIGHT = 450;
+  function adjustTextareaHeight(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, MAX_HEIGHT) + 'px';
+  }
+
+  let prevClickedButton = null;
+  function highlightButton(event, target) {
+    const navLinks = document.querySelectorAll('.mobiles-bottom .nav-link');
+    if (prevClickedButton) {
+      prevClickedButton.classList.remove('active');
+    }
+    event.currentTarget.classList.toggle('active');
+    prevClickedButton = event.currentTarget;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const dropdown = document.getElementById('dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    dropdown.addEventListener('click', function () {
+      dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!dropdownContent.contains(event.target) && event.target !== dropdown) {
+        dropdownContent.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
